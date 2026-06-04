@@ -1,9 +1,7 @@
 import time
-import sys
 
 from sage.all import randint
 
-import vuf.params as params
 
 from vuf_rk import VUFRK, VUFRK_update, VUFRK_verify
 
@@ -37,7 +35,13 @@ if __name__ == "__main__":
         print(f'\t\t- Signature update time: {_t4-_t3}')
 
         pi, v = sigma_rr
-        out = VUFRK_verify(pk_rr, pi, msg, v, B_Epk_2f_rr)
+        out = VUFRK_verify(
+                msg=msg,
+                sigma=sigma_rr,
+                pk=pk_rr,
+                UV=B_Epk_2f_rr
+                )
+
         assert out
         _t5 = time.time()
         print(f'\t\t- Verification time: {_t5-_t4}')
